@@ -1,0 +1,33 @@
+name: shinobi_agent
+description: "A Student Placement OS with AI and Supabase"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 🌍 Network & Database
+  http: ^1.2.0
+  supabase_flutter: ^2.0.0
+
+  # 🗣️ AI & Voice
+  flutter_tts: ^3.8.5
+
+  # 🎨 UI & Charts
+  google_fonts: ^6.3.3
+  fl_chart: ^0.66.0
+  percent_indicator: ^4.2.3
+  cupertino_icons: ^1.0.6
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
