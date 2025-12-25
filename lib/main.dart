@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'constants.dart'; // Ensure this file has your keys!
-import 'screens/dashboard_screen.dart';
+import 'constants.dart';
+import 'screens/main_navigation.dart';
 
 void main() async {
-  // 1. Setup Flutter Binding (Required for Async code in main)
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Set status bar style
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ),
+  );
 
-  // 2. Initialize the Supabase Database Connection
-  // (Make sure you updated constants.dart with your actual keys)
   await Supabase.initialize(
     url: AppConstants.supabaseUrl,
     anonKey: AppConstants.supabaseAnonKey,
   );
 
-  // 3. Run the App
   runApp(const PlacementApp());
 }
 
@@ -26,27 +31,22 @@ class PlacementApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Placement OS',
-
-      // 🎨 GLOBAL THEME SETUP
+      title: 'Placement Tracker',
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF0F0F13), // Deep Space Black
-        cardColor: const Color(0xFF1E1E24),               // Gunmetal Grey
-        primaryColor: const Color(0xFF00E5FF),            // Cyber Cyan
-
-        // Setup Google Fonts globally so you don't have to import it everywhere
-        textTheme: GoogleFonts.poppinsTextTheme(
+        scaffoldBackgroundColor: const Color(0xFF0A0A0F),
+        cardColor: const Color(0xFF1A1A24),
+        primaryColor: const Color(0xFF6C63FF),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFF6C63FF),
+          secondary: Color(0xFF00D9FF),
+          surface: Color(0xFF1A1A24),
+          background: Color(0xFF0A0A0F),
+        ),
+        textTheme: GoogleFonts.interTextTheme(
           ThemeData.dark().textTheme,
         ),
-
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF00E5FF),
-          secondary: Color(0xFFFF0055), // Cyber Pink for accents
-        ),
       ),
-
-      // 🚀 START HERE
-      home: const DashboardScreen(),
+      home: const MainNavigation(),
     );
   }
 }
